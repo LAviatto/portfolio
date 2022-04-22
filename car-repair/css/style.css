@@ -213,6 +213,18 @@ body {
   padding: 0 0.9375rem;
 }
 
+[data-showmore-button] span:last-child {
+  display: none;
+}
+
+._showmore-active [data-showmore-button] span {
+  display: none;
+}
+
+._showmore-active [data-showmore-button] span:last-child {
+  display: block;
+}
+
 [class*=-ibg] {
   position: relative;
 }
@@ -431,9 +443,9 @@ body {
 }
 
 .header__menu {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
 }
 
 .header__body {
@@ -552,12 +564,67 @@ body {
   }
 }
 
-.nav-header__search::before {
+.nav-header__cart::before {
   font-size: 1.5rem;
 }
 
-.nav-header__cart::before {
+.search-header {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  background-color: rgba(7, 7, 7, 0.03);
+  border-radius: 0.1875rem;
+  position: relative;
+  border: 1px solid rgba(4, 4, 4, 0.5);
+}
+
+.search-header__button {
+  position: absolute;
+  background-color: transparent;
+  height: 2.5625rem;
+  width: 2.5625rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 0;
+  right: 0.5rem;
   font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.search-header__input {
+  width: 100%;
+  background-color: transparent;
+  border-radius: 0.1875rem;
+  height: 2.5625rem;
+  color: #4B4B4B;
+  padding: 0px 3.125rem 0px 1.25rem;
+}
+
+.search-header__input::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.search-header__input::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.search-header__input:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.search-header__input::-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.search-header__input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .menu__body {
@@ -1535,27 +1602,21 @@ body {
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.slide-customers__box {
+.slide-customers__text {
+  margin-bottom: 1.125rem;
+  max-height: 10.5rem;
+  height: 100%;
+  overflow: scroll;
+}
+
+.slide-customers__info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-flex-line-pack: justify;
-      align-content: space-between;
-}
-
-.slide-customers__text {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 100%;
-          flex: 1 1 100%;
-  margin-bottom: 1.125rem;
-}
-
-.slide-customers__icon {
+  gap: 1.0625rem;
   border-radius: 50%;
   margin: 0px 1.0625rem 0px 0px;
 }
@@ -1774,6 +1835,7 @@ body {
 
 .scroll__up {
   position: fixed;
+  z-index: 1;
   bottom: 5%;
   right: 3%;
   color: #fff;
@@ -2655,6 +2717,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     margin-bottom: 0;
   }
 
+  .search-header {
+    display: none;
+  }
+
   .menu__body {
     position: fixed;
     width: 100%;
@@ -2868,6 +2934,15 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     gap: 0.3125rem;
   }
 
+  .customers__container-small {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .slide-customers__text {
+    max-height: 4.5rem;
+  }
+
   .impact__box {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
@@ -2888,6 +2963,10 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 }
 
 @media (max-width: 29.99875em) {
+  .search-header {
+    background-color: #fff;
+  }
+
   .bottom-footer__container {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
@@ -2899,11 +2978,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
 
   .customers {
     padding-top: 1.875rem;
-  }
-
-  .customers__container-small {
-    -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
   }
 
   .impact__items {
@@ -2934,11 +3008,11 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     color: #C40B0B;
   }
 
-  .nav-header__search:hover {
+  .nav-header__cart:hover {
     color: #C40B0B;
   }
 
-  .nav-header__cart:hover {
+  .search-header:hover .search-header__button {
     color: #C40B0B;
   }
 

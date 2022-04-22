@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220422122137">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220422210706">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,12 @@
 							</ul>
 						</nav>
 					</div>
-					<a data-da=".header__top,767.98,2" href="#" class="nav-header__search _icon-search"></a>
+					<!-- <a data-da=".header__top,767.98,2" href="#" class="nav-header__search _icon-search"></a> -->
+
+					<form action="#" class="search-header">
+						<input class="search-header__input" autocomplete="off" type="text" name="form[]" data-error="Error" placeholder="Search">
+						<button class="search-header__button _icon-search" type="submit"></button>
+					</form>
 					<a data-da=".header__top,767.98,3" href="#" class="nav-header__cart _icon-cart"></a>
 				</div>
 				<div class="header__body body-header">
@@ -109,7 +114,7 @@
 					<div class="video__text">
 						Nemo enim ipsam voluptatem quia voluptas in proident
 					</div>
-					<a href="https://www.youtube.com/watch?v=2NwujfWDTIs" target="blank" class="video__play">
+					<a href="https://www.youtube.com/watch?v=EozmiAah290" target="blank" class="video__play">
 						<img src="img/video/play.svg" alt="play button">
 					</a>
 				</div>
@@ -233,42 +238,48 @@
 					<div class="customers__slider swiper">
 						<div class="customers__wrapper swiper-wrapper">
 							<div class="customers__slide slide-customers swiper-slide">
-								<div class="slide-customers-box">
+								<div class="slide-customers__box">
 									<div class="slide-customers__text">“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ex magna aliqua. Ut enim illum ad minim veniam, quis ea exercitation ullamco cillum ut enim dolore.”</div>
-									<div class="slide-customers__icon">
+									<div class="slide-customers__info">
 										<picture><source srcset="img/customers/cullen.webp" type="image/webp"><img src="img/customers/cullen.jpg" alt="Cullen Bohannon"></picture>
+										<div class="slide-customers__name">Cullen Bohannon</div>
 									</div>
-									<div class="slide-customers__name">Cullen Bohannon</div>
+
 								</div>
 
 							</div>
 							<div class="customers__slide slide-customers swiper-slide">
-								<div class="slide-customers-box">
+								<div class="slide-customers__box">
 									<div class="slide-customers__text">“Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi ipsam voluptatem aspernatur.”</div>
-									<div class="slide-customers__icon">
+									<div class="slide-customers__info">
 										<picture><source srcset="img/customers/jennifer.webp" type="image/webp"><img src="img/customers/jennifer.jpg" alt="Jennifer Thomas"></picture>
+										<div class="slide-customers__name">Jennifer Thomas</div>
 									</div>
-									<div class="slide-customers__name">Jennifer Thomas</div>
 								</div>
 
 							</div>
 							<div class="customers__slide slide-customers swiper-slide">
-								<div class="slide-customers-box">
-									<div class="slide-customers__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur eligendi iste animi asperiores illo a maxime totam omnis debitis inventore facere at, doloribus doloremque dicta culpa molestiae non, nulla distinctio!</div>
-									<div class="slide-customers__icon">
-										<picture><source srcset="img/customers/jennifer.webp" type="image/webp"><img src="img/customers/jennifer.jpg" alt="Kerezgul Zarylbekova"></picture>
+								<div class="slide-customers__box">
+									<div class="slide-customers__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur eligendi iste animi asperiores illo a maxi Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur eligendi iste animi asperiores illo
+										a maxime totam omnis debitis inventore facere at, doloribus doloremque dicta culpa molestiae non, nulla distinctio!
 									</div>
-									<div class="slide-customers__name">Kerezgul Zarylbekova</div>
+									<div class="slide-customers__info">
+										<picture><source srcset="img/customers/jennifer.webp" type="image/webp"><img src="img/customers/jennifer.jpg" alt="Kerezgul Zarylbekova"></picture>
+										<div class="slide-customers__name">Kerezgul Zarylbekova</div>
+									</div>
 								</div>
 
 							</div>
 							<div class="customers__slide slide-customers swiper-slide">
-								<div class="slide-customers-box">
-									<div class="slide-customers__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis laboriosam temporibus rem in corrupti ad inventore hic. Nostrum tempora, nulla voluptatibus pariatur dolor rerum quasi in neque a delectus veniam?</div>
-									<div class="slide-customers__icon">
-										<picture><source srcset="img/customers/jennifer.webp" type="image/webp"><img src="img/customers/jennifer.jpg" alt="Kerezgul Zarylbekova"></picture>
+								<div class="slide-customers__box">
+									<div class="slide-customers__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis laboriosam temporibus rem in corrupti ad inventore hic. Nostrum tempora, nulla voluptatibus pariatur dolor rerum quasi in neque a delectus veniam? Lorem
+										ipsum, dolor sit amet consectetur adipisicing elit. Debitis laboriosam temporibus rem in corrupti ad inventore hic. Nostrum tempora, nulla voluptatibus pariatur dolor rerum quasi in neque a delectus veniam?
 									</div>
-									<div class="slide-customers__name">Ataibek Salamatov</div>
+									<div class="slide-customers__info">
+										<picture><source srcset="img/customers/jennifer.webp" type="image/webp"><img src="img/customers/jennifer.jpg" alt="Ataibek Salamatov"></picture>
+										<div class="slide-customers__name">Ataibek Salamatov</div>
+									</div>
+
 								</div>
 
 							</div>
@@ -327,7 +338,6 @@
 
 			<a href="#" data-goto=".header" class="scroll__up _icon-arrow_forward">
 			</a>
-
 
 		</main>
 		<footer class="footer">
@@ -432,7 +442,7 @@
 	</div>
 </div>
  -->
-	<script src="js/app.min.js?_v=20220422122137"></script>
+	<script src="js/app.min.js?_v=20220422210706"></script>
 </body>
 
 </html>

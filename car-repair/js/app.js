@@ -234,6 +234,108 @@
         bodyUnlock();
         document.documentElement.classList.remove("menu-open");
     }
+    function showMore() {
+        window.addEventListener("load", (function(e) {
+            const showMoreBlocks = document.querySelectorAll("[data-showmore]");
+            let showMoreBlocksRegular;
+            let mdQueriesArray;
+            if (showMoreBlocks.length) {
+                showMoreBlocksRegular = Array.from(showMoreBlocks).filter((function(item, index, self) {
+                    return !item.dataset.showmoreMedia;
+                }));
+                showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
+                document.addEventListener("click", showMoreActions);
+                window.addEventListener("resize", showMoreActions);
+                mdQueriesArray = dataMediaQueries(showMoreBlocks, "showmoreMedia");
+                if (mdQueriesArray && mdQueriesArray.length) {
+                    mdQueriesArray.forEach((mdQueriesItem => {
+                        mdQueriesItem.matchMedia.addEventListener("change", (function() {
+                            initItems(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+                        }));
+                    }));
+                    initItemsMedia(mdQueriesArray);
+                }
+            }
+            function initItemsMedia(mdQueriesArray) {
+                mdQueriesArray.forEach((mdQueriesItem => {
+                    initItems(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+                }));
+            }
+            function initItems(showMoreBlocks, matchMedia) {
+                showMoreBlocks.forEach((showMoreBlock => {
+                    initItem(showMoreBlock, matchMedia);
+                }));
+            }
+            function initItem(showMoreBlock, matchMedia = false) {
+                showMoreBlock = matchMedia ? showMoreBlock.item : showMoreBlock;
+                let showMoreContent = showMoreBlock.querySelectorAll("[data-showmore-content]");
+                let showMoreButton = showMoreBlock.querySelectorAll("[data-showmore-button]");
+                showMoreContent = Array.from(showMoreContent).filter((item => item.closest("[data-showmore]") === showMoreBlock))[0];
+                showMoreButton = Array.from(showMoreButton).filter((item => item.closest("[data-showmore]") === showMoreBlock))[0];
+                const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
+                if (matchMedia.matches || !matchMedia) if (hiddenHeight < getOriginalHeight(showMoreContent)) {
+                    _slideUp(showMoreContent, 0, hiddenHeight);
+                    showMoreButton.hidden = false;
+                } else {
+                    _slideDown(showMoreContent, 0, hiddenHeight);
+                    showMoreButton.hidden = true;
+                } else {
+                    _slideDown(showMoreContent, 0, hiddenHeight);
+                    showMoreButton.hidden = true;
+                }
+            }
+            function getHeight(showMoreBlock, showMoreContent) {
+                let hiddenHeight = 0;
+                const showMoreType = showMoreBlock.dataset.showmore ? showMoreBlock.dataset.showmore : "size";
+                if ("items" === showMoreType) {
+                    const showMoreTypeValue = showMoreContent.dataset.showmoreContent ? showMoreContent.dataset.showmoreContent : 3;
+                    const showMoreItems = showMoreContent.children;
+                    for (let index = 1; index < showMoreItems.length; index++) {
+                        const showMoreItem = showMoreItems[index - 1];
+                        hiddenHeight += showMoreItem.offsetHeight;
+                        if (index == showMoreTypeValue) break;
+                    }
+                } else {
+                    const showMoreTypeValue = showMoreContent.dataset.showmoreContent ? showMoreContent.dataset.showmoreContent : 150;
+                    hiddenHeight = showMoreTypeValue;
+                }
+                return hiddenHeight;
+            }
+            function getOriginalHeight(showMoreContent) {
+                let parentHidden;
+                let hiddenHeight = showMoreContent.offsetHeight;
+                showMoreContent.style.removeProperty("height");
+                if (showMoreContent.closest(`[hidden]`)) {
+                    parentHidden = showMoreContent.closest(`[hidden]`);
+                    parentHidden.hidden = false;
+                }
+                let originalHeight = showMoreContent.offsetHeight;
+                parentHidden ? parentHidden.hidden = true : null;
+                showMoreContent.style.height = `${hiddenHeight}px`;
+                return originalHeight;
+            }
+            function showMoreActions(e) {
+                const targetEvent = e.target;
+                const targetType = e.type;
+                if ("click" === targetType) {
+                    if (targetEvent.closest("[data-showmore-button]")) {
+                        const showMoreButton = targetEvent.closest("[data-showmore-button]");
+                        const showMoreBlock = showMoreButton.closest("[data-showmore]");
+                        const showMoreContent = showMoreBlock.querySelector("[data-showmore-content]");
+                        const showMoreSpeed = showMoreBlock.dataset.showmoreButton ? showMoreBlock.dataset.showmoreButton : "500";
+                        const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
+                        if (!showMoreContent.classList.contains("_slide")) {
+                            showMoreBlock.classList.contains("_showmore-active") ? _slideUp(showMoreContent, showMoreSpeed, hiddenHeight) : _slideDown(showMoreContent, showMoreSpeed, hiddenHeight);
+                            showMoreBlock.classList.toggle("_showmore-active");
+                        }
+                    }
+                } else if ("resize" === targetType) {
+                    showMoreBlocksRegular && showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
+                    mdQueriesArray && mdQueriesArray.length ? initItemsMedia(mdQueriesArray) : null;
+                }
+            }
+        }));
+    }
     function functions_FLS(message) {
         setTimeout((() => {
             if (window.FLS) console.log(message);
@@ -3261,31 +3363,313 @@
     }));
     core_Swiper.use([ Resize, Observer ]);
     const core = core_Swiper;
-    function initSliders() {
-        if (document.querySelector(".swiper")) new core(".swiper", {
-            modules: [],
-            observer: true,
-            observeParents: true,
-            slidesPerView: 1,
+    function Autoplay(_ref) {
+        let {swiper, extendParams, on, emit} = _ref;
+        let timeout;
+        swiper.autoplay = {
+            running: false,
+            paused: false
+        };
+        extendParams({
             autoplay: {
-                delay: 300
-            },
-            loop: true,
-            spaceBetween: 0,
-            autoHeight: true,
-            speed: 800,
-            navigation: {
-                prevEl: ".swiper-button-prev",
-                nextEl: ".swiper-button-next"
-            },
-            breakpoints: {
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 20
-                }
-            },
-            on: {}
+                enabled: false,
+                delay: 3e3,
+                waitForTransition: true,
+                disableOnInteraction: true,
+                stopOnLastSlide: false,
+                reverseDirection: false,
+                pauseOnMouseEnter: false
+            }
         });
+        function run() {
+            const $activeSlideEl = swiper.slides.eq(swiper.activeIndex);
+            let delay = swiper.params.autoplay.delay;
+            if ($activeSlideEl.attr("data-swiper-autoplay")) delay = $activeSlideEl.attr("data-swiper-autoplay") || swiper.params.autoplay.delay;
+            clearTimeout(timeout);
+            timeout = utils_nextTick((() => {
+                let autoplayResult;
+                if (swiper.params.autoplay.reverseDirection) if (swiper.params.loop) {
+                    swiper.loopFix();
+                    autoplayResult = swiper.slidePrev(swiper.params.speed, true, true);
+                    emit("autoplay");
+                } else if (!swiper.isBeginning) {
+                    autoplayResult = swiper.slidePrev(swiper.params.speed, true, true);
+                    emit("autoplay");
+                } else if (!swiper.params.autoplay.stopOnLastSlide) {
+                    autoplayResult = swiper.slideTo(swiper.slides.length - 1, swiper.params.speed, true, true);
+                    emit("autoplay");
+                } else stop(); else if (swiper.params.loop) {
+                    swiper.loopFix();
+                    autoplayResult = swiper.slideNext(swiper.params.speed, true, true);
+                    emit("autoplay");
+                } else if (!swiper.isEnd) {
+                    autoplayResult = swiper.slideNext(swiper.params.speed, true, true);
+                    emit("autoplay");
+                } else if (!swiper.params.autoplay.stopOnLastSlide) {
+                    autoplayResult = swiper.slideTo(0, swiper.params.speed, true, true);
+                    emit("autoplay");
+                } else stop();
+                if (swiper.params.cssMode && swiper.autoplay.running) run(); else if (false === autoplayResult) run();
+            }), delay);
+        }
+        function start() {
+            if ("undefined" !== typeof timeout) return false;
+            if (swiper.autoplay.running) return false;
+            swiper.autoplay.running = true;
+            emit("autoplayStart");
+            run();
+            return true;
+        }
+        function stop() {
+            if (!swiper.autoplay.running) return false;
+            if ("undefined" === typeof timeout) return false;
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = void 0;
+            }
+            swiper.autoplay.running = false;
+            emit("autoplayStop");
+            return true;
+        }
+        function pause(speed) {
+            if (!swiper.autoplay.running) return;
+            if (swiper.autoplay.paused) return;
+            if (timeout) clearTimeout(timeout);
+            swiper.autoplay.paused = true;
+            if (0 === speed || !swiper.params.autoplay.waitForTransition) {
+                swiper.autoplay.paused = false;
+                run();
+            } else [ "transitionend", "webkitTransitionEnd" ].forEach((event => {
+                swiper.$wrapperEl[0].addEventListener(event, onTransitionEnd);
+            }));
+        }
+        function onVisibilityChange() {
+            const document = ssr_window_esm_getDocument();
+            if ("hidden" === document.visibilityState && swiper.autoplay.running) pause();
+            if ("visible" === document.visibilityState && swiper.autoplay.paused) {
+                run();
+                swiper.autoplay.paused = false;
+            }
+        }
+        function onTransitionEnd(e) {
+            if (!swiper || swiper.destroyed || !swiper.$wrapperEl) return;
+            if (e.target !== swiper.$wrapperEl[0]) return;
+            [ "transitionend", "webkitTransitionEnd" ].forEach((event => {
+                swiper.$wrapperEl[0].removeEventListener(event, onTransitionEnd);
+            }));
+            swiper.autoplay.paused = false;
+            if (!swiper.autoplay.running) stop(); else run();
+        }
+        function onMouseEnter() {
+            if (swiper.params.autoplay.disableOnInteraction) stop(); else {
+                emit("autoplayPause");
+                pause();
+            }
+            [ "transitionend", "webkitTransitionEnd" ].forEach((event => {
+                swiper.$wrapperEl[0].removeEventListener(event, onTransitionEnd);
+            }));
+        }
+        function onMouseLeave() {
+            if (swiper.params.autoplay.disableOnInteraction) return;
+            swiper.autoplay.paused = false;
+            emit("autoplayResume");
+            run();
+        }
+        function attachMouseEvents() {
+            if (swiper.params.autoplay.pauseOnMouseEnter) {
+                swiper.$el.on("mouseenter", onMouseEnter);
+                swiper.$el.on("mouseleave", onMouseLeave);
+            }
+        }
+        function detachMouseEvents() {
+            swiper.$el.off("mouseenter", onMouseEnter);
+            swiper.$el.off("mouseleave", onMouseLeave);
+        }
+        on("init", (() => {
+            if (swiper.params.autoplay.enabled) {
+                start();
+                const document = ssr_window_esm_getDocument();
+                document.addEventListener("visibilitychange", onVisibilityChange);
+                attachMouseEvents();
+            }
+        }));
+        on("beforeTransitionStart", ((_s, speed, internal) => {
+            if (swiper.autoplay.running) if (internal || !swiper.params.autoplay.disableOnInteraction) swiper.autoplay.pause(speed); else stop();
+        }));
+        on("sliderFirstMove", (() => {
+            if (swiper.autoplay.running) if (swiper.params.autoplay.disableOnInteraction) stop(); else pause();
+        }));
+        on("touchEnd", (() => {
+            if (swiper.params.cssMode && swiper.autoplay.paused && !swiper.params.autoplay.disableOnInteraction) run();
+        }));
+        on("destroy", (() => {
+            detachMouseEvents();
+            if (swiper.autoplay.running) stop();
+            const document = ssr_window_esm_getDocument();
+            document.removeEventListener("visibilitychange", onVisibilityChange);
+        }));
+        Object.assign(swiper.autoplay, {
+            pause,
+            run,
+            start,
+            stop
+        });
+    }
+    function effect_init_effectInit(params) {
+        const {effect, swiper, on, setTranslate, setTransition, overwriteParams, perspective} = params;
+        on("beforeInit", (() => {
+            if (swiper.params.effect !== effect) return;
+            swiper.classNames.push(`${swiper.params.containerModifierClass}${effect}`);
+            if (perspective && perspective()) swiper.classNames.push(`${swiper.params.containerModifierClass}3d`);
+            const overwriteParamsResult = overwriteParams ? overwriteParams() : {};
+            Object.assign(swiper.params, overwriteParamsResult);
+            Object.assign(swiper.originalParams, overwriteParamsResult);
+        }));
+        on("setTranslate", (() => {
+            if (swiper.params.effect !== effect) return;
+            setTranslate();
+        }));
+        on("setTransition", ((_s, duration) => {
+            if (swiper.params.effect !== effect) return;
+            setTransition(duration);
+        }));
+        let requireUpdateOnVirtual;
+        on("virtualUpdate", (() => {
+            if (swiper.params.effect !== effect) return;
+            if (!swiper.slides.length) requireUpdateOnVirtual = true;
+            requestAnimationFrame((() => {
+                if (requireUpdateOnVirtual && swiper.slides && swiper.slides.length) {
+                    setTranslate();
+                    requireUpdateOnVirtual = false;
+                }
+            }));
+        }));
+    }
+    function effect_target_effectTarget(effectParams, $slideEl) {
+        if (effectParams.transformEl) return $slideEl.find(effectParams.transformEl).css({
+            "backface-visibility": "hidden",
+            "-webkit-backface-visibility": "hidden"
+        });
+        return $slideEl;
+    }
+    function effect_virtual_transition_end_effectVirtualTransitionEnd(_ref) {
+        let {swiper, duration, transformEl, allSlides} = _ref;
+        const {slides, activeIndex, $wrapperEl} = swiper;
+        if (swiper.params.virtualTranslate && 0 !== duration) {
+            let eventTriggered = false;
+            let $transitionEndTarget;
+            if (allSlides) $transitionEndTarget = transformEl ? slides.find(transformEl) : slides; else $transitionEndTarget = transformEl ? slides.eq(activeIndex).find(transformEl) : slides.eq(activeIndex);
+            $transitionEndTarget.transitionEnd((() => {
+                if (eventTriggered) return;
+                if (!swiper || swiper.destroyed) return;
+                eventTriggered = true;
+                swiper.animating = false;
+                const triggerEvents = [ "webkitTransitionEnd", "transitionend" ];
+                for (let i = 0; i < triggerEvents.length; i += 1) $wrapperEl.trigger(triggerEvents[i]);
+            }));
+        }
+    }
+    function EffectFade(_ref) {
+        let {swiper, extendParams, on} = _ref;
+        extendParams({
+            fadeEffect: {
+                crossFade: false,
+                transformEl: null
+            }
+        });
+        const setTranslate = () => {
+            const {slides} = swiper;
+            const params = swiper.params.fadeEffect;
+            for (let i = 0; i < slides.length; i += 1) {
+                const $slideEl = swiper.slides.eq(i);
+                const offset = $slideEl[0].swiperSlideOffset;
+                let tx = -offset;
+                if (!swiper.params.virtualTranslate) tx -= swiper.translate;
+                let ty = 0;
+                if (!swiper.isHorizontal()) {
+                    ty = tx;
+                    tx = 0;
+                }
+                const slideOpacity = swiper.params.fadeEffect.crossFade ? Math.max(1 - Math.abs($slideEl[0].progress), 0) : 1 + Math.min(Math.max($slideEl[0].progress, -1), 0);
+                const $targetEl = effect_target_effectTarget(params, $slideEl);
+                $targetEl.css({
+                    opacity: slideOpacity
+                }).transform(`translate3d(${tx}px, ${ty}px, 0px)`);
+            }
+        };
+        const setTransition = duration => {
+            const {transformEl} = swiper.params.fadeEffect;
+            const $transitionElements = transformEl ? swiper.slides.find(transformEl) : swiper.slides;
+            $transitionElements.transition(duration);
+            effect_virtual_transition_end_effectVirtualTransitionEnd({
+                swiper,
+                duration,
+                transformEl,
+                allSlides: true
+            });
+        };
+        effect_init_effectInit({
+            effect: "fade",
+            swiper,
+            on,
+            setTranslate,
+            setTransition,
+            overwriteParams: () => ({
+                slidesPerView: 1,
+                slidesPerGroup: 1,
+                watchSlidesProgress: true,
+                spaceBetween: 0,
+                virtualTranslate: !swiper.params.cssMode
+            })
+        });
+    }
+    function initSliders() {
+        if (document.querySelector(".swiper")) {
+            new core(".customers__slider", {
+                modules: [ Autoplay ],
+                observer: true,
+                observeParents: true,
+                slidesPerView: 1,
+                draggable: true,
+                autoplay: {
+                    delay: 3e3
+                },
+                loop: true,
+                spaceBetween: 0,
+                autoHeight: true,
+                speed: 1e3,
+                navigation: {
+                    prevEl: ".swiper-button-prev",
+                    nextEl: ".swiper-button-next"
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20
+                    }
+                },
+                on: {}
+            });
+            new core(".main-slider", {
+                modules: [ Autoplay, EffectFade ],
+                speed: 1e3,
+                observer: true,
+                observeParents: true,
+                slidesPerView: 1,
+                autoplay: {
+                    delay: 3e3
+                },
+                loop: true,
+                effect: "fade",
+                spaceBetween: 0,
+                autoHeight: true,
+                navigation: {
+                    prevEl: ".swiper-button-prev",
+                    nextEl: ".swiper-button-next"
+                },
+                on: {}
+            });
+        }
     }
     window.addEventListener("load", (function(e) {
         initSliders();
@@ -5105,5 +5489,6 @@ PERFORMANCE OF THIS SOFTWARE.
     isWebp();
     menuInit();
     tabs();
+    showMore();
     pageNavigation();
 })();
