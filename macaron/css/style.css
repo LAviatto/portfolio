@@ -167,6 +167,44 @@ h6 {
   padding: 0 0.9375rem;
 }
 
+.tabs__navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.tabs__title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  padding: 0.3125rem 0.625rem;
+  opacity: 0.6;
+}
+
+@supports (margin-bottom: clamp( 0.3125rem , -0.4829545455rem  +  3.9772727273vw , 2.5rem )) {
+  .tabs__title {
+    margin-bottom: clamp( 0.3125rem , -0.4829545455rem  +  3.9772727273vw , 2.5rem );
+  }
+}
+
+@supports not (margin-bottom: clamp( 0.3125rem , -0.4829545455rem  +  3.9772727273vw , 2.5rem )) {
+  .tabs__title {
+    margin-bottom: calc(0.3125rem + 2.1875 * (100vw - 20rem) / 55);
+  }
+}
+
+.tabs__title._tab-active {
+  opacity: 1;
+  border-bottom: 3px solid #D64374;
+}
+
+.tabs__content {
+  padding: 0.625rem 0.9375rem;
+}
+
 [class*=-ibg] {
   position: relative;
 }
@@ -250,6 +288,47 @@ h6 {
   -webkit-transform: scale(0.1, 1);
       -ms-transform: scale(0.1, 1);
           transform: scale(0.1, 1);
+}
+
+.title {
+  text-align: center;
+  font-weight: 600;
+}
+
+@supports (font-size: clamp( 2.375rem , 2.2386363636rem  +  0.6818181818vw , 2.75rem )) {
+  .title {
+    font-size: clamp( 2.375rem , 2.2386363636rem  +  0.6818181818vw , 2.75rem );
+  }
+}
+
+@supports not (font-size: clamp( 2.375rem , 2.2386363636rem  +  0.6818181818vw , 2.75rem )) {
+  .title {
+    font-size: calc(2.375rem + 0.375 * (100vw - 20rem) / 55);
+  }
+}
+
+@supports (line-height: clamp( 2.8125rem , 2.6534090909rem  +  0.7954545455vw , 3.25rem )) {
+  .title {
+    line-height: clamp( 2.8125rem , 2.6534090909rem  +  0.7954545455vw , 3.25rem );
+  }
+}
+
+@supports not (line-height: clamp( 2.8125rem , 2.6534090909rem  +  0.7954545455vw , 3.25rem )) {
+  .title {
+    line-height: calc(2.8125rem + 0.4375 * (100vw - 20rem) / 55);
+  }
+}
+
+@supports (margin-bottom: clamp( 0.625rem , 0.1704545455rem  +  2.2727272727vw , 1.875rem )) {
+  .title {
+    margin-bottom: clamp( 0.625rem , 0.1704545455rem  +  2.2727272727vw , 1.875rem );
+  }
+}
+
+@supports not (margin-bottom: clamp( 0.625rem , 0.1704545455rem  +  2.2727272727vw , 1.875rem )) {
+  .title {
+    margin-bottom: calc(0.625rem + 1.25 * (100vw - 20rem) / 55);
+  }
 }
 
 .header {
@@ -528,6 +607,11 @@ h6 {
   background-color: #F8EDF0;
 }
 
+.slider__container {
+  max-height: 34.0625rem;
+  height: 100%;
+}
+
 @supports (padding-top: clamp( 0.9375rem , -0.0852272727rem  +  5.1136363636vw , 3.75rem )) {
   .slider__container {
     padding-top: clamp( 0.9375rem , -0.0852272727rem  +  5.1136363636vw , 3.75rem );
@@ -622,6 +706,131 @@ h6 {
 
 .main__slide-text {
   margin-bottom: 1.875rem;
+}
+
+@supports (padding-top: clamp( 0.9375rem , -0.0852272727rem  +  5.1136363636vw , 3.75rem )) {
+  .price__container {
+    padding-top: clamp( 0.9375rem , -0.0852272727rem  +  5.1136363636vw , 3.75rem );
+  }
+}
+
+@supports not (padding-top: clamp( 0.9375rem , -0.0852272727rem  +  5.1136363636vw , 3.75rem )) {
+  .price__container {
+    padding-top: calc(0.9375rem + 2.8125 * (100vw - 20rem) / 55);
+  }
+}
+
+@supports (padding-bottom: clamp( 0.9375rem , -0.0852272727rem  +  5.1136363636vw , 3.75rem )) {
+  .price__container {
+    padding-bottom: clamp( 0.9375rem , -0.0852272727rem  +  5.1136363636vw , 3.75rem );
+  }
+}
+
+@supports not (padding-bottom: clamp( 0.9375rem , -0.0852272727rem  +  5.1136363636vw , 3.75rem )) {
+  .price__container {
+    padding-bottom: calc(0.9375rem + 2.8125 * (100vw - 20rem) / 55);
+  }
+}
+
+.tabs__body {
+  text-align: center;
+}
+
+.tabs__subtitle {
+  max-width: 28.375rem;
+  margin: 0 auto;
+}
+
+@supports (margin-bottom: clamp( 0.625rem , -0.0568181818rem  +  3.4090909091vw , 2.5rem )) {
+  .tabs__subtitle {
+    margin-bottom: clamp( 0.625rem , -0.0568181818rem  +  3.4090909091vw , 2.5rem );
+  }
+}
+
+@supports not (margin-bottom: clamp( 0.625rem , -0.0568181818rem  +  3.4090909091vw , 2.5rem )) {
+  .tabs__subtitle {
+    margin-bottom: calc(0.625rem + 1.875 * (100vw - 20rem) / 55);
+  }
+}
+
+.tabs__items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@supports (gap: clamp( 0.625rem , 0.1704545455rem  +  2.2727272727vw , 1.875rem )) {
+  .tabs__items {
+    gap: clamp( 0.625rem , 0.1704545455rem  +  2.2727272727vw , 1.875rem );
+  }
+}
+
+@supports not (gap: clamp( 0.625rem , 0.1704545455rem  +  2.2727272727vw , 1.875rem )) {
+  .tabs__items {
+    gap: calc(0.625rem + 1.25 * (100vw - 20rem) / 55);
+  }
+}
+
+.tabs__item {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 50%;
+          flex: 1 1 50%;
+}
+
+.tabs__item img {
+  max-width: 20rem;
+  max-height: 20rem;
+  width: 100%;
+}
+
+.tabs__item-title {
+  font-weight: 700;
+  margin-bottom: 0.9375rem;
+}
+
+@supports (font-size: clamp( 1.125rem , 0.9431818182rem  +  0.9090909091vw , 1.625rem )) {
+  .tabs__item-title {
+    font-size: clamp( 1.125rem , 0.9431818182rem  +  0.9090909091vw , 1.625rem );
+  }
+}
+
+@supports not (font-size: clamp( 1.125rem , 0.9431818182rem  +  0.9090909091vw , 1.625rem )) {
+  .tabs__item-title {
+    font-size: calc(1.125rem + 0.5 * (100vw - 20rem) / 55);
+  }
+}
+
+@supports (line-height: clamp( 1.3125rem , 1.1079545455rem  +  1.0227272727vw , 1.875rem )) {
+  .tabs__item-title {
+    line-height: clamp( 1.3125rem , 1.1079545455rem  +  1.0227272727vw , 1.875rem );
+  }
+}
+
+@supports not (line-height: clamp( 1.3125rem , 1.1079545455rem  +  1.0227272727vw , 1.875rem )) {
+  .tabs__item-title {
+    line-height: calc(1.3125rem + 0.5625 * (100vw - 20rem) / 55);
+  }
+}
+
+.tabs__item-text {
+  margin-bottom: 0.9375rem;
+}
+
+.tabs__item-price {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 47px;
+  margin-bottom: 1.25rem;
+}
+
+.tabs__item-price span {
+  font-size: 1.25rem;
 }
 
 .swiper {
@@ -816,9 +1025,23 @@ h6 {
   .main__slide-item img {
     width: 100%;
   }
+
+  .tabs__items {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+
+  .tabs__item {
+    text-align: center;
+  }
 }
 
 @media (any-hover: hover) {
+  .tabs__title:hover {
+    color: #D64374;
+    opacity: 1;
+  }
+
   .menu__link:hover {
     color: #D64374;
     text-shadow: 0 0 0.65px #D64374, 0 0 0.65px #D64374;
