@@ -6,17 +6,18 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220704141514">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220704224858">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css?_v=20220704224858" rel="stylesheet">
 
 <body>
 	<div class="wrapper">
 		<header class="header">
 			<div class="header__container">
-				<a href="" class="header__logo">tynchtykmr</a>
+				<a href="index.html" class="header__logo">tynchtykmr</a>
 				<div class="header__menu menu">
 					<button type="button" class="menu__icon icon-menu"><span></span></button>
 					<nav class="menu__body">
@@ -29,10 +30,29 @@
 			</div>
 		</header>
 		<main class="page">
-			<section class="hero">
+			<!-- <section class="hero">
+                <video class="hero__video" autoplay muted loop poster="https://d2ezlykacdqcnj.cloudfront.net/_assets/home-video/beach-waves-loop.jpg">
+                      <source src="https://d2ezlykacdqcnj.cloudfront.net/_assets/home-video/beach-waves-loop.mp4" type="video/mp4">
+                      <source src="https://d2ezlykacdqcnj.cloudfront.net/_assets/home-video/beach-waves-loop.webm" type="video/webm">
+                    </video>
+            </section> -->
 
+			<section class="presentation">
+				<div class="presentation__item item-presentation" data-aos="fade-up" data-aos-duration="3000" style="background-image: url(img/chon_alay/chon_alay.jpg);">
+					<div class="item-presentation__body">
+						<h3 class="item-presentation__title">Чон-Алай (Ошская область)</h3>
+						<a href="chon-alay.html" class="item-presentation__button">Посмотреть</a>
+					</div>
+				</div>
+				<div class="presentation__item item-presentation" data-aos="fade-up" data-aos-duration="3000" style="background-image: url(img/kochkor/kochkor.jpg);">
+					<div class="item-presentation__body">
+						<h3 class="item-presentation__title">Кол-Укок / Кол-Тор (Кочкор)</h3>
+						<a href="kochkor.html" class="item-presentation__button">Посмотреть</a>
+					</div>
+				</div>
 			</section>
-			<section class="about">
+
+			<section class="about" data-aos="fade-up" data-aos-duration="3000">
 				<div class="about__container">
 					<h1 class="about__title">ОТКРОЙТЕ ДЛЯ СЕБЯ КЫРГЫЗСТАН</h1>
 					<span class="about__border"></span>
@@ -44,7 +64,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="intro">
+			<section class="intro" data-aos="fade-up" data-aos-duration="3000">
 				<div class="intro__container">
 					<div class="intro__img">
 						<picture><source srcset="img/tynchtyk.webp" type="image/webp"><img src="img/tynchtyk.jpg" alt=""></picture>
@@ -66,16 +86,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="gallery">
-				<div class="gallery__container">
-					<h2 class="gallery__title">Галерея</h2>
-					<div class="gallery__item item-gallery" style="background-image: url(img/chon_alay/chon_alay.jpg);">
-						<h3 class="item-gallery__title">Чон-Алай (Ошская область)</h3>
-						<a href="" class="item-gallery__button">Посмотреть</a>
-					</div>
-				</div>
-			</section>
-			<section class="contact">
+			<section class="contact" data-aos="fade-up" data-aos-duration="3000">
 				<div class="contact__container">
 					<ul class="contact__info">
 						<h2 class="contact__title">Контакты</h2>
@@ -124,6 +135,7 @@
 			</div>
 		</footer>
 	</div>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js?_v=20220704224858"></script>
 	<!-- 
 <div id="popup" aria-hidden="true" class="popup">
 	<div class="popup__wrapper">
@@ -135,7 +147,7 @@
 	</div>
 </div>
  -->
-	<script src="js/app.min.js?_v=20220704141514"></script>
+	<script src="js/app.min.js?_v=20220704224858"></script>
 </body>
 
 </html>
