@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220715142327">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220718133440">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,7 +49,7 @@
 			<section class="hero">
 				<div class="hero__container">
 					<div class="hero__info">
-						<h1 class="title hero__title">Испанский клуб <span class="red__text">Los Amigos</span>
+						<h1 class="title hero__title">Испанский клуб <span class="red__text red__text-title">Los Amigos</span>
 						</h1>
 						<h2 class="hero__subtitle">Изучай испанский язык с друзьями</h2>
 						<ul class="hero__item">
@@ -183,7 +183,7 @@
 			</section>
 			<section class="teacher">
 				<div class="teacher__container">
-					<h2 class="title">Преподаватели в <span class="red__text">Los Amigos</span></h2>
+					<h2 class="title">Преподаватели в <span class="red__text red__text-losamigos"> <br>Los Amigos</span></h2>
 					<div class="teacher__items">
 						<div class="teacher__item item-teacher">
 							<div class="item-teacher__img">
@@ -263,7 +263,7 @@
 			</section>
 			<section class="schedule">
 				<div class="schedule__container">
-					<h2 class="title">Расписание занятий в <span class="red__text">Los Amigos</span></h2>
+					<h2 class="title">Расписание занятий в <span class="red__text red__text-losamigos"><br>Los Amigos</span></h2>
 					<h3 class="subtitle">Ждём вас каждый <span class="bold__text">понедельник</span> и <span class="bold__text">среду</span></h3>
 					<div class="schedule__items">
 						<div class="schedule__item">
@@ -321,7 +321,7 @@
 			</section>
 			<section class="review">
 				<div class="review__container">
-					<h2 class="title">Отзывы о <span class="red__text">Los Amigos</span></h2>
+					<h2 class="title">Отзывы о <span class="red__text red__text-losamigos"><br>Los Amigos</span></h2>
 					<div class="review__items">
 						<div class="review__item item-review">
 							<div class="item-review__top">
@@ -349,31 +349,32 @@
 						<div class="item-blogs__img">
 							<picture><source srcset="img/blogs/1.webp" type="image/webp"><img src="img/blogs/1.png" alt=""></picture>
 						</div>
-						<div data-spollers class="spollers">
-							<div class="spollers__item">
-								<button type="button" data-spoller class="spollers__title">Tener un corazón de oro</button>
-								<div class="spollers__body">
+						<div data-tabs class="tabs">
+							<nav data-tabs-titles class="tabs__navigation">
+								<button type="button" class="tabs__title _tab-active item-blogs__title">Tener un corazón de oro</button>
+								<button type="button" class="tabs__title item-blogs__title">Иметь золотое сердце</button>
+
+							</nav>
+							<div data-tabs-body class="tabs__content">
+								<div class="tabs__body">
 									<p class="item-blogs__text">Se refiere a una persona muy generosa, de buenos sentimientos, muy amable con los demás. Es una característica positiva de las personas. Ya que el oro es el metal más valioso, decir que tiene el corazón de oro significa
 										que es de mucho valor sus sentimientos. Es un buen refrán para halagar a otra persona con buenas características.</p>
 									<ul class="item-blogs__lists">
 										Ejemplos:
-										<li class="item-blogs__list">“Mi mamá tiene un corazón de oro, siempre es amable con todas las personas”.
-											<audio src="/src/audio/exp1_1.wav"></audio>
+										<li class="item-blogs__list">¡Qué bien se llevan María y Manuel! Están juntos en clase desde los 5 años y nunca se pelean, son uña y carne.
+											<audio controls src="/src/audio/exp1_1.wav"></audio>
 										</li>
 										<li class="item-blogs__list">“La vecina siempre me regala comida caliente, tiene un corazón de oro”.</li>
 										<li class="item-blogs__list">“Ayer hice mi mudanza al nuevo departamento, mis amigos me ayudaron a cargar todas las cajas, tienen un corazón de oro”.</li>
 									</ul>
 								</div>
-							</div>
-							<div class="spollers__item">
-								<button type="button" data-spoller class="spollers__title">Иметь золотое сердце</button>
-								<div class="spollers__body">
+								<div class="tabs__body">
 									<p class="item-blogs__text">Это относится к очень щедрым людям, с хорошими чувствами, очень добрым к другим. Это положительная характеристика людей. Поскольку золото - самый ценный металл, сказать, что у вас золотое сердце, означает, что ваши
 										чувства очень ценны. Это хорошее высказывание, чтобы сделать комплимент другому человеку с хорошими качествами.</p>
 									<ul class="item-blogs__lists">
 										Примеры:
 										<li class="item-blogs__list">«У моей мамы золотое сердце, она всегда добра ко всем»
-											<audio src="/src/audio/exp1_1.wav"></audio>
+											<audio src="/src/audio/exp1_1.wav" type="audio/wav"></audio>
 										</li>
 										<li class="item-blogs__list">«Соседка всегда дает мне горячую еду, у нее золотое сердце»</li>
 										<li class="item-blogs__list">«Вчера я переехал в новую квартиру, друзья помогли мне загрузить все коробки, у них золотое сердце».</li>
@@ -388,8 +389,8 @@
 						</div>
 						<div data-tabs class="tabs">
 							<nav data-tabs-titles class="tabs__navigation">
-								<button type="button" class="tabs__title _tab-active">Como uña y carne</button>
-								<button type="button" class="tabs__title">Как кровь и плоть/Не разлей вода </button>
+								<button type="button" class="tabs__title _tab-active item-blogs__title">Como uña y carne</button>
+								<button type="button" class="tabs__title item-blogs__title">Как кровь и плоть/Не разлей вода </button>
 
 							</nav>
 							<div data-tabs-body class="tabs__content">
@@ -400,7 +401,7 @@
 									<ul class="item-blogs__lists">
 										Ejemplos:
 										<li class="item-blogs__list">¡Qué bien se llevan María y Manuel! Están juntos en clase desde los 5 años y nunca se pelean, son uña y carne.
-											<audio src="/src/audio/exp1_1.wav"></audio>
+											<audio controls src="/src/audio/exp1_1.wav"></audio>
 										</li>
 										<li class="item-blogs__list">Hace tiempo que no la veo, antes éramos uña y carne, pero desde que tiene novio casi no hablo con ella.</li>
 										<li class="item-blogs__list">“Ferrari, la velocidad y el lujo, son como uña y carne”.</li>
@@ -413,7 +414,7 @@
 									<ul class="item-blogs__lists">
 										Примеры:
 										<li class="item-blogs__list">Как хорошо ладят Мария и Мануэль! Они вместе в классе с 5 лет и никогда не ссорятся. Дело в том, что не разлей вода.
-											<audio src="/src/audio/exp1_1.wav"></audio>
+											<audio src="/src/audio/exp1_1.wav" type="audio/wav"></audio>
 										</li>
 										<li class="item-blogs__list">Я не видел ее очень давно, раньше мы были не разлей вода, но с тех пор как у неё появился парень, я почти не общаюсь с ней.</li>
 										<li class="item-blogs__list">«Ferrari, скорость и роскошь - это плоть и кровь».</li>
@@ -446,7 +447,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220715142327"></script>
+	<script src="js/app.min.js?_v=20220718133440"></script>
 </body>
 
 </html>
