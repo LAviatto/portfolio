@@ -3,6 +3,22 @@
 @charset "UTF-8";
 
 @font-face {
+  font-family: edo;
+  font-display: swap;
+  src: url("../fonts/edo.woff2") format("woff2"), url("../fonts/edo.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Omnes;
+  font-display: swap;
+  src: url("../fonts/Omnes.woff2") format("woff2"), url("../fonts/Omnes.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: parkway_lush;
   font-display: swap;
   src: url("../fonts/parkway_lush.woff2") format("woff2"), url("../fonts/parkway_lush.woff") format("woff");
@@ -416,6 +432,35 @@ body::after {
   display: none;
 }
 
+.purple__text {
+  color: #57236d;
+}
+
+.purple__text-title {
+  font-family: edo;
+}
+
+@supports (font-size: clamp( 4.375rem , 3.6931818182rem  +  3.4090909091vw , 6.25rem )) {
+  .purple__text-title {
+    font-size: clamp( 4.375rem , 3.6931818182rem  +  3.4090909091vw , 6.25rem );
+  }
+}
+
+@supports not (font-size: clamp( 4.375rem , 3.6931818182rem  +  3.4090909091vw , 6.25rem )) {
+  .purple__text-title {
+    font-size: calc(4.375rem + 1.875 * (100vw - 20rem) / 55);
+  }
+}
+
+.purple__text-losamigos {
+  font-family: edo;
+  font-size: 3rem;
+}
+
+.purple__text br {
+  display: none;
+}
+
 .bold__text {
   font-weight: 700;
 }
@@ -616,7 +661,7 @@ body::after {
 }
 
 .intro__eng {
-  background-color: #57236d;
+  background-color: #009be8;
 }
 
 .intro__button {
@@ -782,6 +827,40 @@ body::after {
   }
 }
 
+.intro__button-purple {
+  color: #57236d;
+}
+
+.intro__button-purple:hover {
+  background: #57236d;
+  -webkit-box-shadow: 0 0 5px #57236d, 0 0 25px #57236d, 0 0 50px #57236d, 0 0 100px #57236d;
+          box-shadow: 0 0 5px #57236d, 0 0 25px #57236d, 0 0 50px #57236d, 0 0 100px #57236d;
+}
+
+.intro__button-purple span:nth-child(1) {
+  background: -webkit-gradient(linear, left top, right top, from(transparent), to(#57236d));
+  background: -o-linear-gradient(left, transparent, #57236d);
+  background: linear-gradient(90deg, transparent, #57236d);
+}
+
+.intro__button-purple span:nth-child(2) {
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#57236d));
+  background: -o-linear-gradient(top, transparent, #57236d);
+  background: linear-gradient(180deg, transparent, #57236d);
+}
+
+.intro__button-purple span:nth-child(3) {
+  background: -webkit-gradient(linear, right top, left top, from(transparent), to(#57236d));
+  background: -o-linear-gradient(right, transparent, #57236d);
+  background: linear-gradient(270deg, transparent, #57236d);
+}
+
+.intro__button-purple span:nth-child(4) {
+  background: -webkit-gradient(linear, left bottom, left top, from(transparent), to(#57236d));
+  background: -o-linear-gradient(bottom, transparent, #57236d);
+  background: linear-gradient(360deg, transparent, #57236d);
+}
+
 .no-webp .hero{
   background-image: url(../img/hero/bg.jpg); }
 
@@ -880,10 +959,6 @@ body::after {
   }
 }
 
-.hero__title span {
-  color: #92140C;
-}
-
 .hero__subtitle {
   font-size: 1.375rem;
   line-height: 1.5909090909;
@@ -958,6 +1033,10 @@ body::after {
 .hero__media img {
   width: 100%;
   border-radius: 50%;
+}
+
+.hero__button-en {
+  background-color: #57236d;
 }
 
 .level__items {
@@ -1509,6 +1588,10 @@ body::after {
   }
 }
 
+.schedule__time-en {
+  color: #57236d;
+}
+
 .contact__item {
   background: #FFF1D9;
   display: -webkit-box;
@@ -1788,6 +1871,9 @@ body::after {
 
 .blogs__container {
   text-align: center;
+}
+
+.blogs__items {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -1833,6 +1919,10 @@ body::after {
   }
 
   .red__text {
+    display: block;
+  }
+
+  .purple__text {
     display: block;
   }
 
@@ -1985,7 +2075,7 @@ body::after {
     max-width: 100%;
   }
 
-  .blogs__container {
+  .blogs__items {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
@@ -2028,6 +2118,10 @@ body::after {
 @media (any-hover: hover) {
   .button:hover {
     color: #EBA823;
+  }
+
+  .header__eng .menu__link:hover {
+    color: #57236d;
   }
 
   .menu__link:hover {
