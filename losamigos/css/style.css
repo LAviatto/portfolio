@@ -591,7 +591,7 @@ body::after {
 }
 
 .menu__link {
-  font-family: "Roboto";
+  font-family: "Montserrat";
   font-weight: 400;
   font-size: 0.9375rem;
   line-height: 1.2;
@@ -981,10 +981,9 @@ body::after {
 }
 
 .hero__list {
-  font-family: "Roboto";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
-  padding-left: 2.5rem;
   color: #000000;
   opacity: 0.7;
   position: relative;
@@ -1016,18 +1015,6 @@ body::after {
 
 .hero__list:not(:last-child) {
   margin-bottom: 1.0625rem;
-}
-
-.hero__list::before {
-  content: "";
-  position: absolute;
-  background-image: url(/a846de3d885718af0992.svg);
-  background-repeat: no-repeat;
-  background-size: auto;
-  top: 0;
-  left: 0;
-  width: 2rem;
-  height: 2rem;
 }
 
 .hero__media img {
@@ -1077,7 +1064,7 @@ body::after {
   font-weight: 600;
   font-size: 11.75rem;
   color: #92140C;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 @supports (top: clamp( 0.9375rem , 0.1420454545rem  +  3.9772727273vw , 3.125rem )) {
@@ -1913,6 +1900,12 @@ body::after {
   font-weight: 400;
 }
 
+.item-blogs__list audio {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1.25rem;
+}
+
 @media (max-width: 47.99875em) {
   .title {
     text-align: center;
@@ -2098,10 +2091,6 @@ body::after {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
-  }
-
-  .hero__list::before {
-    top: -0.3125rem;
   }
 
   .hero__button {
